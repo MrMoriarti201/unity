@@ -315,15 +315,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 820630970}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce92536f2ac28f0429a48ec596137a15, type: 3}
+  m_Script: {fileID: 11500000, guid: 6225ad7728ffeee428ad8f68abab5611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 675135491}
   ms: 2
-  offsetZ: 3
-  offsetY: 1
-  smooth: 2
-  AngleLimit: {x: -40, y: 60}
+  distance: {x: 3, y: 1}
+  angle: {x: -15, y: 45}
 --- !u!4 &820630975
 Transform:
   m_ObjectHideFlags: 0
@@ -398,13 +396,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1419188298}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7a3955d0cb4df548b3f420b5d7a13c8, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c24c90ea91eead4e95c19286a48f609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 820630975}
-  PlayerSpeed: 5
-  JumpSpeed: 20
-  rotSpeed: 15
+  cam: {fileID: 820630975}
+  speed: 7.5
+  rotSpeed: 25
 --- !u!1 &1501510086
 GameObject:
   m_ObjectHideFlags: 0

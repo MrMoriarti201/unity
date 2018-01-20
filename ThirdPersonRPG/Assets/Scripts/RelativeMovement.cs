@@ -37,12 +37,9 @@ public class RelativeMovement : MonoBehaviour {
 			} else
 				moveDir = Vector3.zero;
 
-			if (moveDir.x != 0 || moveDir.z != 0) {
-			
-				//transform.rotation = Quaternion.Euler (0.0f,target.eulerAngles.y,0.0f); // Быстрый поворот
-				Quaternion desiredRotation = Quaternion.Euler (0.0f, target.eulerAngles.y, 0.0f);
-				transform.rotation = Quaternion.Slerp (_myTransform.rotation, desiredRotation, Time.deltaTime * rotSpeed);
-			}
+		if (moveDir.x > 0) {
+			transform.rotation = Quaternion.Euler (target.TransformDirection(target.right));
+		}
 
 
 			moveDir = _myTransform.TransformDirection (moveDir);

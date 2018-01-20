@@ -39,7 +39,7 @@ public class OrbitCamera : MonoBehaviour {
 	}
 
 	private void CameraMove(){
-		_myTransform.rotation = Quaternion.Lerp (_myTransform.rotation, Quaternion.Euler (xRot, yRot, 0.0f), Time.deltaTime * smooth);
+		_myTransform.rotation = Quaternion.Euler (xRot, yRot, 0.0f);
 		_myTransform.position = target.position - _myTransform.forward * offsetZ+_myTransform.up*offsetY;
 	}
 }
