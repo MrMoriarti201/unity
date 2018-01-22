@@ -11,7 +11,7 @@ public class PlayerStats : MonoBehaviour {
 	private float AttackCost=50.0f;
 	private float SprintCost = 2.0f;
 	private float StaminaReg = 1.0f;
-	private float HeatlhReg = 0.5f;
+	//private float HeatlhReg = 0.5f;
 
 	float currentHealth;
 	public float currentStamina;
@@ -35,8 +35,8 @@ public class PlayerStats : MonoBehaviour {
 		return currentStamina;
 	}
 
-	public bool Attack(bool canAttack){
-		if (currentStamina - AttackCost > 0 && canAttack) {
+	public bool Attack(){
+		if (currentStamina - AttackCost > 0 ) {
 			currentStamina -= AttackCost;
 			return true;
 		}

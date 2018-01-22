@@ -4,24 +4,9 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour {
 
-	public Transform _camera;
-	private Transform _myTransform;
-	public Transform GroundCheck;
 	public float PlayerWalkSpeed=8.0f;
 	public float PlayerRunSpeed=8.0f;
 	public float RotationSpeed=15.0f;
-
-	public int IgnoreMask=8;
-
-	[Range(0,1)]
-	public float airControlPercent;
-
-	float velocityY;
-	public float JumpHeight=2.0f;
-	public float Gravity = 9.8f;
-
-	private CharacterController _controller;
-	private PlayerStats _stats;
 
 	float turnSmoothVelocity;
 	public float turnSmoothTime=0.12f;
@@ -30,10 +15,19 @@ public class Movement : MonoBehaviour {
 	float speedSmoothVelocity;
 	float currentSpeed;
 
-	public float FallingDistance = 0.4f;
-	public float sphereCastRadius=0.1f;
+	[Range(0,1)]
+	public float airControlPercent;
+
+	float velocityY;
+	public float JumpHeight=2.0f;
+	public float Gravity = 9.8f;
 
 	private Animator _animator;
+	private CharacterController _controller;
+	private PlayerStats _stats;
+	public Transform _camera;
+	private Transform _myTransform;
+	public Transform GroundCheck;
 
 	// Use this for initialization
 	void Start () {
@@ -51,8 +45,7 @@ public class Movement : MonoBehaviour {
 		Vector2 inputDir = input.normalized;
 
 		bool running = (Input.GetKey (KeyCode.LeftShift ) && _stats.Sprint()>0);
-
-		bool attack =  (Input.GetKeyDown (KeyCode.Mouse0 ) && _stats.Attack(groundCheck()));
+		bool attack =  (Input.GetKeyDown (KeyCode.Mouse0) && _stats.Attack());
 
 		Move (inputDir,running);
 
@@ -63,11 +56,10 @@ public class Movement : MonoBehaviour {
 		//Animator
 		float animationSpeedPercent = ((running) ? currentSpeed/PlayerRunSpeed : currentSpeed/PlayerWalkSpeed*0.5f) * inputDir.magnitude;
 		_animator.SetFloat ("speedPercent", animationSpeedPercent,speedSmoothTime,Time.deltaTime);
-		_animator.SetBool ("falling", !groundCheck());
+		//_animator.SetBool ("falling", !groundCheck());
 		_animator.SetBool ("attack", attack);
 
-
-		Debug.DrawRay (GroundCheck.position,-GroundCheck.up*FallingDistance, Color.blue);
+		//Debug
 
 
 	}
@@ -119,17 +111,8 @@ public class Movement : MonoBehaviour {
 		return smoothTime / airControlPercent;
 	}
 
-	private bool groundCheck(){
 
-		Ray down = new Ray (GroundCheck.position, -GroundCheck.up);
 
-		LayerMask mask = ~(1 << IgnoreMask);
-
-		if(Physics.SphereCast(down,sphereCastRadius,FallingDistance,mask)){
-			return true;
-		}
-		else return false;
-	}
 
 
 }
