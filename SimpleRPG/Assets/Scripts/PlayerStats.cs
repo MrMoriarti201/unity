@@ -10,16 +10,17 @@ public class PlayerStats : MonoBehaviour {
 
 	private float AttackCost=50.0f;
 	private float SprintCost = 2.0f;
-	private float StaminaReg = 1.0f;
+	private float StaminaReg;
 	//private float HeatlhReg = 0.5f;
 
-	float currentHealth;
+	//float currentHealth;
 	public float currentStamina;
 
 
 	void Start(){
-		currentHealth = Health;
+		//currentHealth = Health;
 		currentStamina = Stamina;
+		StaminaReg = Stamina / 1000;
 	}
 
 	void Update(){

@@ -42,10 +42,11 @@ public class Movement : MonoBehaviour {
 
 		//Input
 		Vector2 input = new Vector2 (Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"));
-		Vector2 inputDir = input.normalized;
+		Vector2 inputDir = input.normalized;	
 
 		bool running = (Input.GetKey (KeyCode.LeftShift ) && _stats.Sprint()>0);
-		bool attack =  (Input.GetKeyDown (KeyCode.Mouse0) && _stats.Attack());
+		bool fall = !(_controller.isGrounded);
+		bool attack =  (Input.GetKeyDown (KeyCode.Mouse0) && _stats.Attack() && !fall);
 
 		Move (inputDir,running);
 
@@ -58,6 +59,7 @@ public class Movement : MonoBehaviour {
 		_animator.SetFloat ("speedPercent", animationSpeedPercent,speedSmoothTime,Time.deltaTime);
 		//_animator.SetBool ("falling", !groundCheck());
 		_animator.SetBool ("attack", attack);
+		_animator.SetBool ("fall", fall);
 
 		//Debug
 
