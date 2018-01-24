@@ -2,18 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct intVector2{
+	public int x;
+	public int y;
+
+	public intVector2(int a,int b){
+		x = a;
+		y = b;
+	}
+}
+
 public class Leaf {
 
 	private const int MIN_LEAF_SIZE=6;
 
-	public float x,y,width,height;
+	public int x,y,width,height;
 
 	public Leaf leftChild;
 	public Leaf rightChild;
 	public Room room;
 	public List<Room> halls;
 
-	public Leaf(float X,float  Y,float  Width,float  Height){
+	public Leaf(int X,int  Y,int  Width,int  Height){
 		x = X;
 		y = Y;
 		width = Width;
@@ -30,12 +40,12 @@ public class Leaf {
 		else if (height > width && height / width > 1.25f)
 			splitH = true;
 
-		float max = (splitH ? height : width) - MIN_LEAF_SIZE;
+		int max = (splitH ? height : width) - MIN_LEAF_SIZE;
 
 		if (max <= MIN_LEAF_SIZE)
 			return false;
 		
-		float split = Random.Range (MIN_LEAF_SIZE, max + 1);
+		int split = Random.Range (MIN_LEAF_SIZE, max + 1);
 
 		if (splitH) {
 			leftChild = new Leaf (x, y, width, split);
@@ -57,10 +67,10 @@ public class Leaf {
 				rightChild.createRooms ();
 			}
 		} else {
-			Vector2 roomSize;
-			Vector2 roomPos;
-			roomSize = new Vector2 (Random.Range (3, width - 1), Random.Range (3, height - 1));
-			roomPos = new Vector2 (Random.Range (1, width - roomSize.x), Random.Range (1, height - roomSize.y));
+			intVector2 roomSize;
+			intVector2 roomPos;
+			roomSize = new intVector2 (Random.Range (3, width - 1), Random.Range (3, height - 1));
+			roomPos = new intVector2 (Random.Range (1, width - roomSize.x), Random.Range (1, height - roomSize.y));
 			room = new Room (x + roomPos.x, y + roomPos.y, roomSize.x, roomSize.y);
 		}
 	}

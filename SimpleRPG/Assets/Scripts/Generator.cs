@@ -6,7 +6,7 @@ public class Generator : MonoBehaviour {
 
 	const int MAX_LEAF_SIZE=20;
 	public GameObject leaf;
-	public float scale=10.0f;
+
 
 	public int mapWidth = 50;
 	public int mapHeight = 50;
@@ -41,6 +41,7 @@ public class Generator : MonoBehaviour {
 		{
 			
 			Debug.Log ("X:" + l.x + " Y:" + l.y + " width:" + l.width + " height:" + l.height); 
+			Instantiate (leaf, new Vector3 (l.x, 1.0f, l.y), leaf.transform.rotation);
 		}
 
 
