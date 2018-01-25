@@ -16,7 +16,7 @@ public class Leaf {
 
 	private const int MIN_LEAF_SIZE=6;
 
-	public int x,y,width,height;
+	public int x, y, width, height;
 
 	public Leaf leftChild;
 	public Leaf rightChild;
@@ -28,6 +28,7 @@ public class Leaf {
 		y = Y;
 		width = Width;
 		height = Height;
+
 	}
 
 	public bool split(){

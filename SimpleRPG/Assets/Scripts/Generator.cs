@@ -36,11 +36,13 @@ public class Generator : MonoBehaviour {
 
 		}
 		root.createRooms ();
-
+		int i = 0;
 		foreach(Leaf l in _leafs.ToArray())
 		{
 			
-			Debug.Log ("X:" + l.x + " Y:" + l.y + " width:" + l.width + " height:" + l.height); 
+			i++;
+			Debug.Log ("Number" + i + " X:" + l.x + " Y:" + l.y + " width:" + l.width + " height:" + l.height);
+			leaf.transform.localScale=new Vector3(l.width,1.0f,l.height);
 			Instantiate (leaf, new Vector3 (l.x, 1.0f, l.y), leaf.transform.rotation);
 		}
 
