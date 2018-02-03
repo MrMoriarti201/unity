@@ -49,8 +49,9 @@ public class Movement : MonoBehaviour {
 		bool attack =  (Input.GetKeyDown (KeyCode.Mouse0) && _stats.Attack() && !fall);
 
 		Move (inputDir,running);
-
+		bool jump=false;
 		if (Input.GetKeyDown (KeyCode.Space)) {
+			jump = true;
 			Jump ();
 		}
 			
@@ -58,8 +59,9 @@ public class Movement : MonoBehaviour {
 		float animationSpeedPercent = ((running) ? currentSpeed/PlayerRunSpeed : currentSpeed/PlayerWalkSpeed*0.5f) * inputDir.magnitude;
 		_animator.SetFloat ("speedPercent", animationSpeedPercent,speedSmoothTime,Time.deltaTime);
 		//_animator.SetBool ("falling", !groundCheck());
-		_animator.SetBool ("attack", attack);
-		_animator.SetBool ("fall", fall);
+		_animator.SetBool ("Attack", attack);
+		_animator.SetBool ("Jump", jump);
+		jump = false;
 
 		//Debug
 

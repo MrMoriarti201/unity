@@ -20,7 +20,7 @@ public class PlayerStats : MonoBehaviour {
 	void Start(){
 		//currentHealth = Health;
 		currentStamina = Stamina;
-		StaminaReg = Stamina / 1000;
+		StaminaReg = Stamina / 10;
 	}
 
 	void Update(){
