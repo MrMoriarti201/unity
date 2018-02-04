@@ -289,35 +289,6 @@ Transform:
   m_Father: {fileID: 1561338468}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &208334671
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100000, guid: 5e50c833dcbe69c42ac2c103f80da532, type: 3}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 208334672}
-  m_Layer: 0
-  m_Name: Spartan_Sword (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &208334672
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400000, guid: 5e50c833dcbe69c42ac2c103f80da532, type: 3}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 208334671}
-  m_LocalRotation: {x: -0.72087175, y: 0.17773171, z: 0.6608457, w: -0.10971974}
-  m_LocalPosition: {x: 0.00134, y: 0.0176, z: 0.01156}
-  m_LocalScale: {x: 0.004924606, y: 0.004924606, z: 0.0049246047}
-  m_Children:
-  - {fileID: 1726016277}
-  m_Father: {fileID: 396311581}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: -175.6, y: 84.1, z: 23.730988}
 --- !u!1 &213143636
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,6 +837,72 @@ Transform:
   m_Father: {fileID: 1142760865}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &562198101
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 396311581}
+    m_Modifications:
+    - target: {fileID: 400000, guid: f97a59326a2e83742b0ac7d50691360d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0018
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f97a59326a2e83742b0ac7d50691360d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0032
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f97a59326a2e83742b0ac7d50691360d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0107
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f97a59326a2e83742b0ac7d50691360d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f97a59326a2e83742b0ac7d50691360d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f97a59326a2e83742b0ac7d50691360d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f97a59326a2e83742b0ac7d50691360d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f97a59326a2e83742b0ac7d50691360d, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f97a59326a2e83742b0ac7d50691360d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f97a59326a2e83742b0ac7d50691360d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.4773813
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f97a59326a2e83742b0ac7d50691360d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.4773823
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f97a59326a2e83742b0ac7d50691360d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.4773821
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f97a59326a2e83742b0ac7d50691360d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f97a59326a2e83742b0ac7d50691360d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: f97a59326a2e83742b0ac7d50691360d, type: 3}
+  m_IsPrefabParent: 0
 --- !u!1 &580813454
 GameObject:
   m_ObjectHideFlags: 0
@@ -2431,79 +2468,6 @@ Transform:
   m_Father: {fileID: 1142760865}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1726016276
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100002, guid: 5e50c833dcbe69c42ac2c103f80da532, type: 3}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1726016277}
-  - component: {fileID: 1726016279}
-  - component: {fileID: 1726016278}
-  m_Layer: 0
-  m_Name: Spartan_Sword
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1726016277
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400002, guid: 5e50c833dcbe69c42ac2c103f80da532, type: 3}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1726016276}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.425452, y: 1.6483, z: 0.006736667}
-  m_LocalScale: {x: 0.18002638, y: 0.39143047, z: 0.85706884}
-  m_Children: []
-  m_Father: {fileID: 208334672}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &1726016278
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 2300000, guid: 5e50c833dcbe69c42ac2c103f80da532,
-    type: 3}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1726016276}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_Materials:
-  - {fileID: 2100000, guid: 004adc6cbc4768443bd04d4f473f6cad, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!33 &1726016279
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 3300000, guid: 5e50c833dcbe69c42ac2c103f80da532,
-    type: 3}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1726016276}
-  m_Mesh: {fileID: 4300000, guid: 5e50c833dcbe69c42ac2c103f80da532, type: 3}
 --- !u!1 &1766402826
 GameObject:
   m_ObjectHideFlags: 0
