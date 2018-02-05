@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 3e2277901d78f974abffc99e50f542d6
-timeCreated: 1516783259
+timeCreated: 1517857395
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -846,7 +846,7 @@ ModelImporter:
     - name: 32.L
       parentName: 31.L
       position: {x: 1.6300523e-10, y: 0.0013193095, z: -4.0978193e-10}
-      rotation: {x: 0.0312692, y: -0.0048596663, z: -0.012612152, w: 0.9994197}
+      rotation: {x: 0.031269196, y: -0.0048596663, z: -0.01261215, w: 0.9994197}
       scale: {x: 1.0000007, y: 1.000001, z: 0.9999999}
     - name: 32.L_end
       parentName: 32.L
@@ -916,7 +916,7 @@ ModelImporter:
     - name: 11.R
       parentName: Hand.R
       position: {x: -0.000065238986, y: 0.0037107542, z: 0.0011800614}
-      rotation: {x: 0.024347052, y: -0.018244082, z: -0.038912203, w: 0.99877936}
+      rotation: {x: 0.024347054, y: -0.018244082, z: -0.038912207, w: 0.99877936}
       scale: {x: 1.0000002, y: 1.0000004, z: 1}
     - name: 12,L.002
       parentName: 11.R
@@ -981,7 +981,7 @@ ModelImporter:
     - name: Big2.R
       parentName: Big1.R
       position: {x: 0.0000000013165785, y: 0.0010533234, z: 7.4505804e-11}
-      rotation: {x: 0.0035008998, y: -0.84006244, z: -0.035827655, w: 0.5412939}
+      rotation: {x: 0.0035009, y: -0.8400625, z: -0.03582766, w: 0.541294}
       scale: {x: 0.99999994, y: 1.0000012, z: 1.0000007}
     - name: Big2.R_end
       parentName: Big2.R
@@ -1068,7 +1068,7 @@ ModelImporter:
       position: {x: -0, y: 0.0061860704, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    armTwist: 0.5
+    armTwist: 1
     foreArmTwist: 0.5
     upperLegTwist: 0.5
     legTwist: 0.5
