@@ -47,6 +47,8 @@ public class Movement : MonoBehaviour {
 		bool running = (Input.GetKey (KeyCode.LeftShift ) && _stats.Sprint()>0);
 		bool fall = !(_controller.isGrounded);
 		bool attack =  (Input.GetKeyDown (KeyCode.Mouse0) && _stats.Attack() && !fall);
+		bool specialAttack = (Input.GetKeyDown (KeyCode.Z) && !fall);
+		bool slide = (Input.GetKey (KeyCode.LeftControl) && !fall);
 
 		Move (inputDir,running);
 		bool jump=false;
@@ -60,7 +62,9 @@ public class Movement : MonoBehaviour {
 		_animator.SetFloat ("speedPercent", animationSpeedPercent,speedSmoothTime,Time.deltaTime);
 		//_animator.SetBool ("falling", !groundCheck());
 		_animator.SetBool ("Attack", attack);
+		_animator.SetBool ("SpecialAttack", specialAttack);
 		_animator.SetBool ("Jump", jump);
+		_animator.SetBool ("Slide", slide);
 		jump = false;
 
 		//Debug

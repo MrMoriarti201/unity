@@ -482,12 +482,14 @@ public class Dungeon : MonoBehaviour {
 								}
 							}
 							idCounter++;
-							direction++;
+
 							if(direction==5)
 								direction=1;
-							breakCounter++;
+							else direction++;
+
 							if(breakCounter==4)
 								break;
+							else breakCounter++;
 
 						}else if(diff==amount-NumberOfRooms)
 						{
@@ -500,86 +502,119 @@ public class Dungeon : MonoBehaviour {
 
 		// Коридоры
 
-		for(int a=0;a<amount;a++)
+		for(int t=0;t<amount;t++)
 		{
 			int cx1,cx2,cy1,cy2;
-			int direction=Random.Range(1,5);
+			int direction=Random.Range(1,3);
 			int counter=0;
 			do
 			{
-				if(!leafs[a].connected)
+				if(!leafs[t].connected){
 					switch(direction)
-				{
-				case 1:
 					{
-						if((int)a/RBW>0 && (leafs[a-RBW].ID==-1 || leafs[a-RBW].ID!=leafs[a].ID) && !leafs[a-RBW].connected)
+					case 1:
 						{
-							cx1=MinX+a%RBW*RW;
-							cy1=leafs[a-RBW].y+leafs[a-RBW].h;
-							cy2=leafs[a].y;
-							for(int i=cy1;i<cy2;i++)
+							if((int)t/RBW<RBH-1 && (leafs[t+RBW].ID==-1 || leafs[t+RBW].ID!=leafs[t].ID) && !leafs[t+RBW].connected)
 							{
-								grid[i,cx1]=coridor;
+								cx1=MinX+(int)t%RBW*RW;
+								cx2=cx1;
+
+								if(leafs[t+RBW].x <= cx1-1 && leafs[t].x <= cx1-1)
+								{
+									cx1--;
+
+								}
+
+								if(((leafs[t+RBW].x+leafs[t+RBW].w) >= cx2+1) && ((leafs[t].x+leafs[t].w) >=cx2+1))
+								{
+									cx2++;
+
+								}
+
+								if(Random.value >0.5f)
+								{
+									if(leafs[t+RBW].x <= cx1-1 && leafs[t].x <= cx1-1)
+									{
+										cx1--;
+
+									}
+
+									else if(((leafs[t+RBW].x+leafs[t+RBW].w) >= cx2+1) && ((leafs[t].x+leafs[t].w) >=cx2+1))
+									{
+										cx2++;
+
+									}
+								}
+
+								cy1=leafs[t].y+leafs[t].h;
+								cy2=leafs[t+RBW].y;
+								for(int i=cy1;i<cy2;i++)
+								{
+									for(int j=cx1;j<cx2;j++)
+									{
+
+										grid[i,j]=coridor;
+									}
+								}
+								leafs[t].connected=true;
 							}
-							leafs[a].connected=true;
+							break;
 						}
-						break;
-					}
-				case 2:
-					{
-						if((int)a%RBW>0 && (leafs[a-1].ID==-1 || leafs[a-1].ID!=leafs[a].ID) && !leafs[a-1].connected)
+					case 2:
 						{
-							cy1=MinY+a/RBW*RH;
-							cx1=leafs[a-1].x+leafs[a-1].w;
-							cx2=leafs[a].x;
-							for(int i=cx1;i<cx2;i++)
+							if((int)t%RBW<RBW-1 && (leafs[t+1].ID==-1 || leafs[t+1].ID!=leafs[t].ID) && !leafs[t+1].connected)
 							{
-								grid[cy1,i]=coridor;
+								cy1=MinY+(int)t/RBW*RH;
+								cy2=cy1;
+
+								if(leafs[t+1].y <= cy1-1 && leafs[t].y <= cy1-1)
+								{
+									cy1--;
+								}
+
+								if(leafs[t+1].y+leafs[t+1].h >= cy2+1 && leafs[t].y+leafs[t].h >= cy2+1 )
+								{
+									cy2++;
+								}
+
+								if(Random.value > 0.5f)
+								{
+									if(leafs[t+1].y <= cy1-1 && leafs[t].y <= cy1-1)
+									{
+										cy1--;
+									}
+									else if(leafs[t+1].y+leafs[t+1].h >= cy2+1 && leafs[t].y+leafs[t].h >= cy2+1 )
+									{
+										cy2++;
+									}
+								}
+
+								cx1=leafs[t].x+leafs[t].w;
+								cx2=leafs[t+1].x;
+								for(int i=cy1;i<cy2;i++)
+								{
+									for(int j=cx1;j<cx2;j++)
+									{
+
+										grid[i,j]=coridor;
+									}
+								}
+								leafs[t].connected=true;
 							}
-							leafs[a].connected=true;
+							break;
 						}
-						break;
-					}
-				case 3:
-					{
-						if((int)a/RBW<RBH-1 && (leafs[a+RBW].ID==-1 || leafs[a+RBW].ID!=leafs[a].ID) && !leafs[a+RBW].connected)
-						{
-							cx1=MinX+a%RBW*RW;
-							cy1=leafs[a].y+leafs[a].h;
-							cy2=leafs[a+RBW].y;
-							for(int i=cy1;i<cy2;i++)
-							{
-								grid[i,cx1]=coridor;
-							}
-							leafs[a].connected=true;
-						}
-						break;
-					}
-				case 4:
-					{
-						if((int)a%RBW<RBW-1 && (leafs[a+1].ID==-1 || leafs[a+1].ID!=leafs[a].ID) && !leafs[a+1].connected)
-						{
-							cy1=MinY+a/RBW*RH;
-							cx1=leafs[a].x+leafs[a].w;
-							cx2=leafs[a+1].x;
-							for(int i=cx1;i<cx2;i++)
-							{
-								grid[cy1,i]=coridor;
-							}
-							leafs[a].connected=true;
-						}
-						break;
 					}
 				}
-				direction++;
-				if(direction==5)
+
+				if(direction>=3)
 					direction=1;
+				else direction++;
 
-				counter++;
-				if(counter==4)
+				if(counter==2)
 					break;
+				else counter++;
 
-			}while(!leafs[a].connected);
+			}while(!leafs[t].connected);
 		}
 	}
 		
