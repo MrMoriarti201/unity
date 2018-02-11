@@ -15,6 +15,8 @@ public class Movement : MonoBehaviour {
 	float speedSmoothVelocity;
 	float currentSpeed;
 
+	bool flashlight;
+
 	[Range(0,1)]
 	public float airControlPercent;
 
@@ -31,11 +33,13 @@ public class Movement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		flashlight = false;
 		_myTransform = transform;
 		startPosition = _myTransform.position;
 		_controller = GetComponent<CharacterController> ();
 		_animator = GetComponentInChildren<Animator> ();
 		_stats = GetComponent<PlayerStats> ();
+		_myTransform.position = GameObject.FindObjectOfType<Dungeon>().StartPosition ();
 	}
 	
 	// Update is called once per frame
@@ -44,22 +48,32 @@ public class Movement : MonoBehaviour {
 		//Input
 		Vector2 input = new Vector2 (Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"));
 		Vector2 inputDir = input.normalized;	
-
+		//Bools
 		bool running = (Input.GetKey (KeyCode.LeftShift ) && _stats.Sprint()>0);
 		bool fall = !(_controller.isGrounded);
 		bool attack =  (Input.GetKeyDown (KeyCode.Mouse0) && _stats.Attack() && !fall);
 		bool specialAttack = (Input.GetKeyDown (KeyCode.Z) && !fall);
 		bool slide = (Input.GetKey (KeyCode.LeftControl) && !fall);
-
+		//Move
 		Move (inputDir,running);
 		bool jump=false;
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			jump = true;
 			Jump ();
 		}
+		//Restart Position
 		if (Input.GetKey (KeyCode.T)) {
 			_myTransform.position = startPosition;
 		}
+		//Flashlight
+		if (Input.GetKey (KeyCode.F)) {
+			flashlight = !flashlight;
+			Light fl = gameObject.GetComponentInChildren<Light> ();
+			fl.enabled = flashlight;
+
+		}
+			
+			
 		//Animator
 		float animationSpeedPercent = ((running) ? currentSpeed/PlayerRunSpeed : currentSpeed/PlayerWalkSpeed*0.5f) * inputDir.magnitude;
 		_animator.SetFloat ("speedPercent", animationSpeedPercent,speedSmoothTime,Time.deltaTime);
@@ -70,7 +84,7 @@ public class Movement : MonoBehaviour {
 		_animator.SetBool ("Slide", slide);
 		jump = false;
 
-		//Debug
+
 
 
 	}

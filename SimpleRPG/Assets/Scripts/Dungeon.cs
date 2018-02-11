@@ -13,7 +13,9 @@ public class Dungeon : MonoBehaviour {
 	char [,] grid;
 	int NumberOfRooms=13;
 	int RealNumberOfRooms;
-
+	int MinX;
+	int MinY;
+	Vector3 firstRoom;
 	int Level;
 
 	Leaf [] leafs;
@@ -34,6 +36,11 @@ public class Dungeon : MonoBehaviour {
 		GenerateMap();
 		GenerateLeafs();
 		Generate3D();
+	}
+
+	public Vector3 StartPosition(){
+		firstRoom = new Vector3 ((leafs [0].x + (int)leafs [0].w / 2)*Floor.transform.lossyScale.x, 1.5f, (leafs [0].y + (int)leafs [0].w / 2)*Floor.transform.lossyScale.z);
+		return firstRoom;
 	}
 
 	public bool Check(){
@@ -87,12 +94,14 @@ public class Dungeon : MonoBehaviour {
 			for (int j = 0; j < X; j++) {
 				if (grid [i, j] == freeSpace) {
 					
-					Instantiate (Wall, new Vector3 (j * Wall.transform.lossyScale.z, 0+Wall.transform.lossyScale.y/2, i * Wall.transform.lossyScale.x), Quaternion.identity,Map.transform);
+					Instantiate (Wall, new Vector3 (j * Wall.transform.lossyScale.x, 0+Wall.transform.lossyScale.y/2, i * Wall.transform.lossyScale.z), Quaternion.identity,Map.transform);
 
 				} else if (grid [i, j] == border || grid [i, j] == coridor) {
 					
-					Instantiate (Floor, new Vector3 (j * Floor.transform.lossyScale.z,0.5f, i * Floor.transform.lossyScale.x), Quaternion.identity,Map.transform);
+					Instantiate (Floor, new Vector3 (j * Floor.transform.lossyScale.x,0.5f, i * Floor.transform.lossyScale.x), Quaternion.identity,Map.transform);
 					Floor.name = "Row" + j + " Column" + i;
+					Instantiate (Floor, new Vector3 (j * Floor.transform.lossyScale.x,Wall.transform.lossyScale.y-0.5f, i * Floor.transform.lossyScale.z), Quaternion.identity,Map.transform);
+					Floor.name = "Ceiling";
 
 
 				}
@@ -100,7 +109,7 @@ public class Dungeon : MonoBehaviour {
 			
 		}
 	}
-	
+
 	public void GenerateMap(){
 		
 	for (int i = 0; i < Y; i++) {
@@ -199,8 +208,8 @@ public class Dungeon : MonoBehaviour {
 			leafs[i] = new Leaf();
 		}
 
-		int MinX=(int)RW/2;
-		int MinY=(int)RH/2;
+		MinX=(int)RW/2;
+		MinY=(int)RH/2;
 
 		for(int i=0;i<amount;i++)
 		{
@@ -547,6 +556,8 @@ public class Dungeon : MonoBehaviour {
 		}while(diff!=amount-NumberOfRooms);
 
 		// Коридоры
+
+
 
 		for(int t=0;t<amount;t++)
 		{
