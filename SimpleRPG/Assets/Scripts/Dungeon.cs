@@ -7,7 +7,7 @@ public class Dungeon : MonoBehaviour {
 
 	public GameObject Floor;
 	public GameObject Wall;
-
+	public bool isCeiling;
 	int X = 100;
 	int Y = 100;
 	char [,] grid;
@@ -100,8 +100,10 @@ public class Dungeon : MonoBehaviour {
 					
 					Instantiate (Floor, new Vector3 (j * Floor.transform.lossyScale.x,0.5f, i * Floor.transform.lossyScale.x), Quaternion.identity,Map.transform);
 					Floor.name = "Row" + j + " Column" + i;
-					Instantiate (Floor, new Vector3 (j * Floor.transform.lossyScale.x,Wall.transform.lossyScale.y-0.5f, i * Floor.transform.lossyScale.z), Quaternion.identity,Map.transform);
-					Floor.name = "Ceiling";
+					if (isCeiling) {
+						Instantiate (Floor, new Vector3 (j * Floor.transform.lossyScale.x, Wall.transform.lossyScale.y - 0.5f, i * Floor.transform.lossyScale.z), Quaternion.identity, Map.transform);
+						Floor.name = "Ceiling";
+					}
 
 
 				}

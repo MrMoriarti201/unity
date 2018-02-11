@@ -371,6 +371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Floor: {fileID: 1556680053639528, guid: 31262a07db16fd247b4e0e84b5e5c4a8, type: 2}
   Wall: {fileID: 1340871557546888, guid: 2dbc4760d3bbf5c43946314ebbbd316d, type: 2}
+  isCeiling: 1
 --- !u!4 &489247421
 Transform:
   m_ObjectHideFlags: 0
