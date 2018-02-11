@@ -7,13 +7,14 @@ public class Dungeon : MonoBehaviour {
 
 	public GameObject Floor;
 	public GameObject Wall;
-	[SerializeField]
-	public const int X = 100;
-	public const int Y = 100;
-	private int NumberOfRooms=13;
+
+	int X = 100;
+	int Y = 100;
+	char [,] grid;
+	int NumberOfRooms=13;
 	int RealNumberOfRooms;
 
-	char [,] grid=new char[Y,X];
+	int Level;
 
 	Leaf [] leafs;
 
@@ -27,10 +28,55 @@ public class Dungeon : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if (X * Y / NumberOfRooms > 20) {
-			GenerateMap();
-			GenerateLeafs();
-			Generate3D();
+		RandomDifficulty (ref X,ref Y,ref NumberOfRooms,ref Level);
+		Debug.Log ("Difficulty=" + Level);
+		grid=new char[Y,X];
+		GenerateMap();
+		GenerateLeafs();
+		Generate3D();
+	}
+
+	public bool Check(){
+		if (X * Y / NumberOfRooms > 20)
+			return true;
+		else return false;
+	}
+
+	public void RandomDifficulty( ref int A, ref int B,ref int C,ref int L){
+		L = Random.Range (1, 5);
+		switch (Level) {
+		case 1:
+			
+				A = Random.Range (20, 41);
+				B = Random.Range (20, 41);
+			do {
+				C = Random.Range (3, 6);
+			} while(!Check ());
+			break;
+		case 2:
+			
+				A = Random.Range (40, 81);
+				B = Random.Range (40, 81);
+			do {
+				C = Random.Range (5, 10);
+			} while(!Check ());
+			break;
+		case 3:
+			
+				A= Random.Range (80, 121);
+				B = Random.Range (80, 121);
+			do {
+				C = Random.Range (9, 13);
+			} while(!Check ());
+			break;
+		case 4:
+			
+				A = Random.Range (120, 161);
+				B = Random.Range (120, 161);
+			do {
+				C = Random.Range (12, 17);
+			} while(!Check ());
+			break;
 		}
 	}
 
@@ -169,15 +215,15 @@ public class Dungeon : MonoBehaviour {
 			NY=(int)A/RBW;
 
 			//Локальные координаты
-			leafs[A].x=Random.Range(0,(RW-MinX));
-			leafs[A].y=Random.Range(0,(RH-MinY));
+			leafs[A].x=Random.Range(0,(RW-MinX-1));
+			leafs[A].y=Random.Range(0,(RH-MinY-1));
 			// Генерируем высоту и ширину в зависимости от локальных координат
-			leafs[A].w=Random.Range(MinX,(RW-leafs[A].x));
-			leafs[A].h=Random.Range(MinY,(RH-leafs[A].y));
+			leafs[A].w=Random.Range(MinX,(RW-leafs[A].x-1));
+			leafs[A].h=Random.Range(MinY,(RH-leafs[A].y-1));
 			// Переводим локальные координаты в глобальные
 			leafs[A].x += (NX*RW+1);
 			leafs[A].y += (NY*RH+1);
-			Debug.Log ("X:" + leafs [A].x + " Y:" + leafs [A].y + " W:" + leafs [A].w + " H:" + leafs [A].h);
+
 
 
 			for(int i=leafs[A].y;i<leafs[A].y+leafs[A].h;i++)

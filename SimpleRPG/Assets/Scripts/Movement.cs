@@ -21,7 +21,7 @@ public class Movement : MonoBehaviour {
 	float velocityY;
 	public float JumpHeight=2.0f;
 	public float Gravity = 9.8f;
-
+	Vector3 startPosition;
 	private Animator _animator;
 	private CharacterController _controller;
 	private PlayerStats _stats;
@@ -32,6 +32,7 @@ public class Movement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		_myTransform = transform;
+		startPosition = _myTransform.position;
 		_controller = GetComponent<CharacterController> ();
 		_animator = GetComponentInChildren<Animator> ();
 		_stats = GetComponent<PlayerStats> ();
@@ -56,7 +57,9 @@ public class Movement : MonoBehaviour {
 			jump = true;
 			Jump ();
 		}
-			
+		if (Input.GetKey (KeyCode.T)) {
+			_myTransform.position = startPosition;
+		}
 		//Animator
 		float animationSpeedPercent = ((running) ? currentSpeed/PlayerRunSpeed : currentSpeed/PlayerWalkSpeed*0.5f) * inputDir.magnitude;
 		_animator.SetFloat ("speedPercent", animationSpeedPercent,speedSmoothTime,Time.deltaTime);
