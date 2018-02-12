@@ -36,10 +36,11 @@ public class Movement : MonoBehaviour {
 		flashlight = false;
 		_myTransform = transform;
 		startPosition = _myTransform.position;
+			
 		_controller = GetComponent<CharacterController> ();
 		_animator = GetComponentInChildren<Animator> ();
 		_stats = GetComponent<PlayerStats> ();
-		_myTransform.position = GameObject.FindObjectOfType<Dungeon>().StartPosition ();
+		_myTransform.position = GameObject.FindObjectOfType<Dungeon> ().StartPosition ();
 	}
 	
 	// Update is called once per frame
@@ -62,17 +63,16 @@ public class Movement : MonoBehaviour {
 			Jump ();
 		}
 		//Restart Position
-		if (Input.GetKey (KeyCode.T)) {
+		if (Input.GetKeyDown (KeyCode.T)) {
 			_myTransform.position = startPosition;
 		}
 		//Flashlight
-		if (Input.GetKey (KeyCode.F)) {
+		if (Input.GetKeyDown (KeyCode.F)) {
 			flashlight = !flashlight;
 			Light fl = gameObject.GetComponentInChildren<Light> ();
 			fl.enabled = flashlight;
 
 		}
-			
 			
 		//Animator
 		float animationSpeedPercent = ((running) ? currentSpeed/PlayerRunSpeed : currentSpeed/PlayerWalkSpeed*0.5f) * inputDir.magnitude;
@@ -88,6 +88,7 @@ public class Movement : MonoBehaviour {
 
 
 	}
+
 
 	private void Move(Vector2 inputDir,bool running){
 		
