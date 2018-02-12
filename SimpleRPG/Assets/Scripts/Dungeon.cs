@@ -7,7 +7,7 @@ public class Dungeon : MonoBehaviour {
 
 	public GameObject Floor;
 	public GameObject Wall;
-	public Material Escape;
+	public GameObject Escape;
 	public bool isCeiling;
 	private int X = 100;
 	private int Y = 100;
@@ -49,16 +49,7 @@ public class Dungeon : MonoBehaviour {
 		volume.isTrigger = true;
 		volume.size = new Vector3(x,Wall.transform.lossyScale.y,z);
 		volume.tag = "Exit";
-		zone.AddComponent<ParticleSystem>();
-		ParticleSystem PS = zone.GetComponent<ParticleSystem> ();
-		PS.GetComponent<ParticleSystemRenderer> ().material = Escape;
-		ParticleSystem.MainModule MA = PS.main;
-		Color color = new Color (Random.Range (0.0f, 255.0f), Random.Range (0.0f, 255.0f),Random.Range (0.0f, 255.0f), 1.0f);
-		MA.startColor = color;
-		MA.startSize = 2.5f;
-
-
-
+		Instantiate (Escape, new Vector3(trigger.x,1.0f,trigger.z), Quaternion.identity, zone.transform);
 
 	}
 
