@@ -284,7 +284,7 @@ public class Leaf
 											for(int j=tx1;j<tx2;j++)
 											{
 												grid[q,j]=border;
-												//Draw();
+
 											}
 										}
 										leafs[i].x=tx1;
@@ -348,7 +348,7 @@ public class Leaf
 											for(int j=tx1;j<tx2;j++)
 											{
 												grid[q,j]=border;
-												//Draw();
+
 											}
 										}
 
@@ -414,7 +414,7 @@ public class Leaf
 											for(int j=tx1;j<tx2;j++)
 											{
 												grid[q,j]=border;
-												//Draw();
+
 											}
 										}
 
@@ -481,7 +481,7 @@ public class Leaf
 											for(int j=tx1;j<tx2;j++)
 											{
 												grid[q,j]=border;
-												//Draw();
+
 											}
 										}
 

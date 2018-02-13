@@ -8,6 +8,7 @@ public class Dungeon : MonoBehaviour {
 	public GameObject Floor;
 	public GameObject Wall;
 	public GameObject Escape;
+	GameObject Map;
 	public bool isCeiling;
 	private int X = 100;
 	private int Y = 100;
@@ -15,14 +16,33 @@ public class Dungeon : MonoBehaviour {
 	private int Difficulty;
 	private int NumberOfRooms;
 	Leaf leaf;
+	GameObject zone;
+	DungeonStart player;
+
+
+	void Awake(){
+		player = GameObject.FindGameObjectWithTag("Player").GetComponent<DungeonStart> ();
+		zone = new GameObject ("Level Escape");
+	}
 
 	// Use this for initialization
 	void Start () {
+		
 		GenerateDungeon ();
+
 	}
 		
 	void Update(){
+		if (zone.GetComponent<EscapeTrigger> ().getEnterTrigger()) {
+			DeleteDungeon ();
+			GenerateDungeon ();
+		}
+
+	}
 		
+
+	void DeleteDungeon(){
+		Destroy (Map);
 	}
 
 	void GenerateDungeon(){
@@ -34,6 +54,8 @@ public class Dungeon : MonoBehaviour {
 		leaf.GenerateLeafs(ref grid,X,Y,NumberOfRooms);
 		Generate3D();
 		CreateTriggerZone ();
+		player.setPlayerTransform (StartPosition ());
+
 	}
 
 	private void CreateTriggerZone(){
@@ -42,16 +64,19 @@ public class Dungeon : MonoBehaviour {
 		float y = temp.y;
 		float z = temp.z;
 		Vector3 trigger = new Vector3 (x * Floor.transform.lossyScale.x, Wall.transform.lossyScale.y/2, z * Floor.transform.lossyScale.z);
-		GameObject zone = new GameObject ("Level Escape");
 		zone.transform.position = trigger;
 		zone.AddComponent<BoxCollider> ();
 		BoxCollider volume = zone.GetComponent<BoxCollider> ();
 		volume.isTrigger = true;
-		volume.size = new Vector3(x,Wall.transform.lossyScale.y,z);
+		volume.size = new Vector3( Wall.transform.lossyScale.y/2,Wall.transform.lossyScale.y/2,Wall.transform.lossyScale.y/2);
+		volume.center = new Vector3 (0, -Wall.transform.lossyScale.y / 4 + 1, 0);
 		volume.tag = "Exit";
+		zone.AddComponent<EscapeTrigger> ();
 		Instantiate (Escape, new Vector3(trigger.x,1.0f,trigger.z), Quaternion.identity, zone.transform);
 
 	}
+
+
 
 	public Vector3 StartPosition(){
 		Vector3 temp = leaf.getStartPosition ();
@@ -106,7 +131,8 @@ public class Dungeon : MonoBehaviour {
 	}
 
 	public void Generate3D(){
-		GameObject Map = new GameObject ("Dungeon");
+		Map = new GameObject ("Dungeon");
+		Map.tag = "Dungeon";
 		Map.transform.position = new Vector3 (0, 0, 0);
 		for (int i = 0; i < Y; i++) {
 			for (int j = 0; j < X; j++) {

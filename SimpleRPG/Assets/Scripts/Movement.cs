@@ -29,18 +29,15 @@ public class Movement : MonoBehaviour {
 	private PlayerStats _stats;
 	public Transform _camera;
 	private Transform _myTransform;
-	public Transform GroundCheck;
 
 	// Use this for initialization
 	void Start () {
 		flashlight = false;
 		_myTransform = transform;
 		startPosition = _myTransform.position;
-			
 		_controller = GetComponent<CharacterController> ();
 		_animator = GetComponentInChildren<Animator> ();
 		_stats = GetComponent<PlayerStats> ();
-		_myTransform.position = GameObject.FindObjectOfType<Dungeon> ().StartPosition ();
 	}
 	
 	// Update is called once per frame
@@ -83,12 +80,8 @@ public class Movement : MonoBehaviour {
 		_animator.SetBool ("Jump", jump);
 		_animator.SetBool ("Slide", slide);
 		jump = false;
-
-
-
-
 	}
-
+		
 
 	private void Move(Vector2 inputDir,bool running){
 		
