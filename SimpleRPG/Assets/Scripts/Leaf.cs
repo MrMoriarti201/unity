@@ -19,12 +19,15 @@ public class Leaf
 	private int NX;
 	private int NY;
 	private int NumberOfRooms;
+	private int MonstersAmount;
 	private Vector3 Position;
 	private Vector3 triggerPosition;
+	private Vector3 [] Monsters;
 
 	private char freeSpace='.';
 	private char border='#';
 	private char coridor='@';
+	private char monster='m';
 
 	public Leaf(){
 		x = 0;
@@ -42,8 +45,18 @@ public class Leaf
 			return border;
 		else if (ch == 'c')
 			return coridor;
+		else if (ch == 'm')
+			return monster;
 		else
 			return 'f';
+	}
+
+	public int getMonstersAmount(){
+		return MonstersAmount;
+	}
+
+	public Vector3 getMonsterPosition(int i){
+		return Monsters [i];
 	}
 
 	public Vector3 getTriggerZone(){
@@ -167,8 +180,9 @@ public class Leaf
 
 	public void GenerateLeafs(ref char [,] grid,int X,int Y,int N){
 		int amount=GetAmountOfRooms(X,Y,N);
-
+		MonstersAmount = (int)Random.Range (1, amount / 2);
 		Leaf [] leafs = new Leaf[amount];
+		Monsters = new Vector3[MonstersAmount];
 
 		for (int i = 0; i < amount; i++) {
 			leafs[i] = new Leaf();
@@ -525,10 +539,25 @@ public class Leaf
 		Position = new Vector3 (leafs [0].getX() + leafs [0].getW () / 2, 0.5f, leafs [0].getY() + leafs [0].getH () / 2);
 		triggerPosition=new Vector3 (leafs [amount-1].getX() + leafs [amount-1].getW () / 2, 0.5f, leafs [amount-1].getY() + leafs [amount-1].getH () / 2);
 
+		int lastRoom=-1;
+		//Monsters
+		for (int i = 0; i < MonstersAmount; i++) {
+			
+			int randomRoom = Random.Range (i+1, amount-1);
+			if (lastRoom == randomRoom) {
+				do{
+				randomRoom = Random.Range (i, amount-1);	
+				}while(lastRoom==randomRoom);
+			} else {
+				Vector3 MP=new Vector3 (leafs [randomRoom].getX () + leafs [randomRoom].getW () / 2, 1, leafs [randomRoom].getY () + leafs [randomRoom].getH () / 2);
+				Monsters [i] = MP;
+				lastRoom = randomRoom;
+
+
+			}
+		}
+
 		// Коридоры
-
-
-
 		for(int t=0;t<amount;t++)
 		{
 			int cx1,cx2,cy1,cy2;

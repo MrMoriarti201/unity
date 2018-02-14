@@ -15,6 +15,9 @@ public class Movement : MonoBehaviour {
 	float speedSmoothVelocity;
 	float currentSpeed;
 
+	bool attack;
+	bool specialAttack;
+
 	bool flashlight;
 
 	[Range(0,1)]
@@ -49,8 +52,8 @@ public class Movement : MonoBehaviour {
 		//Bools
 		bool running = (Input.GetKey (KeyCode.LeftShift ) && _stats.Sprint()>0);
 		bool fall = !(_controller.isGrounded);
-		bool attack =  (Input.GetKeyDown (KeyCode.Mouse0) && _stats.Attack() && !fall);
-		bool specialAttack = (Input.GetKeyDown (KeyCode.Z) && !fall);
+		attack =  (Input.GetKeyDown (KeyCode.Mouse0) && _stats.PerformAttack() && !fall);
+		specialAttack = (Input.GetKeyDown (KeyCode.Z) && !fall  && _stats.PerformSP_Attack());
 		bool slide = (Input.GetKey (KeyCode.LeftControl) && !fall);
 		//Move
 		Move (inputDir,running);
@@ -80,6 +83,15 @@ public class Movement : MonoBehaviour {
 		_animator.SetBool ("Jump", jump);
 		_animator.SetBool ("Slide", slide);
 		jump = false;
+	}
+
+	public int isAttacked(){
+		if (attack)
+			return 1;
+		if (specialAttack)
+			return 2;
+		else
+			return 0;
 	}
 		
 

@@ -1336,7 +1336,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1933054754110880}
-  m_LocalRotation: {x: 0.70612806, y: 0.7018587, z: 0.037192002, w: -0.085990936}
+  m_LocalRotation: {x: 0.706128, y: 0.70185864, z: 0.037192, w: -0.08599093}
   m_LocalPosition: {x: 0.00051, y: -0.00017, z: -0.00703}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2276,7 +2276,6 @@ MonoBehaviour:
   JumpHeight: 25
   Gravity: 60
   _camera: {fileID: 0}
-  GroundCheck: {fileID: 0}
 --- !u!114 &114909531644225108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2289,8 +2288,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 100
+  Attack: 25
+  SP_Attack: 50
   Stamina: 1000
-  currentStamina: 0
 --- !u!137 &137185727053909864
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

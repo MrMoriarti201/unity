@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Dungeon : MonoBehaviour {
 
-
+	public GameObject Monster;
 	public GameObject Floor;
 	public GameObject Wall;
 	public GameObject Escape;
 	GameObject Map;
+	bool finished;
+	int counter;
 	public bool isCeiling;
 	private int X = 100;
 	private int Y = 100;
@@ -18,11 +20,16 @@ public class Dungeon : MonoBehaviour {
 	Leaf leaf;
 	GameObject zone;
 	DungeonStart player;
+	List<GameObject> Monsters;
 
 
 	void Awake(){
+		finished = false;
+		counter = 0;
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<DungeonStart> ();
 		zone = new GameObject ("Level Escape");
+		zone.AddComponent<EscapeTrigger> ();
+
 	}
 
 	// Use this for initialization
@@ -32,12 +39,21 @@ public class Dungeon : MonoBehaviour {
 
 	}
 		
-	void Update(){
+	void Update ()
+	{
+		
+
+		
+
 		if (zone.GetComponent<EscapeTrigger> ().getEnterTrigger()) {
 			DeleteDungeon ();
 			GenerateDungeon ();
 		}
 
+	}
+
+	public Vector3 ScaleVector(Vector3 Vector){
+		return new Vector3 (Vector.x * Floor.transform.lossyScale.x, Vector.y, Vector.z * Floor.transform.lossyScale.z);
 	}
 		
 
@@ -47,11 +63,14 @@ public class Dungeon : MonoBehaviour {
 
 	void GenerateDungeon(){
 		leaf = new Leaf();
+		counter = 0;
+		finished = false;
 		RandomDifficulty (ref X,ref Y,ref NumberOfRooms,ref Difficulty);
 		Debug.Log ("Difficulty=" + Difficulty);
 		grid=new char[Y,X];
 		leaf.GenerateMap(ref grid,X,Y);
 		leaf.GenerateLeafs(ref grid,X,Y,NumberOfRooms);
+		Monsters=new List<GameObject>();
 		Generate3D();
 		CreateTriggerZone ();
 		player.setPlayerTransform (StartPosition ());
@@ -71,7 +90,6 @@ public class Dungeon : MonoBehaviour {
 		volume.size = new Vector3( Wall.transform.lossyScale.y/2,Wall.transform.lossyScale.y/2,Wall.transform.lossyScale.y/2);
 		volume.center = new Vector3 (0, -Wall.transform.lossyScale.y / 4 + 1, 0);
 		volume.tag = "Exit";
-		zone.AddComponent<EscapeTrigger> ();
 		Instantiate (Escape, new Vector3(trigger.x,1.0f,trigger.z), Quaternion.identity, zone.transform);
 
 	}
@@ -136,25 +154,29 @@ public class Dungeon : MonoBehaviour {
 		Map.transform.position = new Vector3 (0, 0, 0);
 		for (int i = 0; i < Y; i++) {
 			for (int j = 0; j < X; j++) {
-				if (grid [i, j] == leaf.getChar('f')) {
+				if (grid [i, j] == leaf.getChar ('f')) {
 					
-					Instantiate (Wall, new Vector3 (j * Wall.transform.lossyScale.x, 0+Wall.transform.lossyScale.y/2, i * Wall.transform.lossyScale.z), Quaternion.identity,Map.transform);
+					Instantiate (Wall, new Vector3 (j * Wall.transform.lossyScale.x, 0 + Wall.transform.lossyScale.y / 2, i * Wall.transform.lossyScale.z), Quaternion.identity, Map.transform);
 
-				} else if (grid [i, j] == leaf.getChar('b') || grid [i, j] == leaf.getChar('c')) {
+				} else if (grid [i, j] == leaf.getChar ('b') || grid [i, j] == leaf.getChar ('c')) {
 					
-					Instantiate (Floor, new Vector3 (j * Floor.transform.lossyScale.x,0.5f, i * Floor.transform.lossyScale.z), Quaternion.identity,Map.transform);
+					Instantiate (Floor, new Vector3 (j * Floor.transform.lossyScale.x, 0.5f, i * Floor.transform.lossyScale.z), Quaternion.identity, Map.transform);
 					Floor.name = "Floor";
 					if (isCeiling) {
 						Instantiate (Floor, new Vector3 (j * Floor.transform.lossyScale.x, Wall.transform.lossyScale.y - 0.5f, i * Floor.transform.lossyScale.z), Quaternion.identity, Map.transform);
 						Floor.name = "Ceiling";
-					}
-
-
+						}
+					} 
 				}
 			}
-			
+		GameObject M = new GameObject ("Monsters");
+		M.transform.parent = Map.transform;
+		for (int i = 0; i < leaf.getMonstersAmount(); i++) {
+			Monsters.Add(Instantiate (Monster, ScaleVector(leaf.getMonsterPosition(i)), Quaternion.identity, M.transform) as GameObject);
+			Monster.name = "Wolf";
 		}
+			
 	}
-
-
 }
+
+
